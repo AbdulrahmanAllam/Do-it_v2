@@ -1,7 +1,6 @@
+import 'package:do_it_flutter_v2/layouts/splash_screen.dart';
+import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:flutter/material.dart';
-import 'features/task/task.dart';
-import 'features/tasks/tasks.dart';
-import 'features/user/ui/sign_in/sign_in_screen.dart';
 import 'utils/app_colors.dart';
 
 void main() {
@@ -11,6 +10,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("color : ${Colors.amber.value}");
     return MaterialApp(
       theme: ThemeData(
           appBarTheme: AppBarTheme(
@@ -23,31 +23,8 @@ class MyApp extends StatelessWidget {
             elevation: 0.0,
           ),
           scaffoldBackgroundColor: AppColors.white),
-      home: SignInScreen(),
+      initialRoute: SplashScreen.route,
+      routes: AppRouter.routes,
     );
-  }
-}
-
-class Dark extends StatefulWidget {
-
-  
-
-  @override
-  _DarkState createState() => _DarkState();
-}
-
-
-
-class _DarkState extends State<Dark> {
-
-  @override
-  void initState() {
-    Tasks().getTasks(context: context);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Text("Hi");
   }
 }

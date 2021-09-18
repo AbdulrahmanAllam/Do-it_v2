@@ -4,30 +4,28 @@ import 'package:flutter/material.dart';
 class CustomItemWidget extends StatelessWidget {
   void Function()? deleteItem;
   void Function()? onTap;
-  void Function()? tapOnIcon;
-  IconData? icon;
-  Color? iconColor;
+  void Function()? tapOnCircle;
+  Color? circleColor;
   TextStyle? textStyle;
   String? text;
 
   CustomItemWidget(
-      {this.icon,
-      this.iconColor,
+      {this.circleColor,
       this.text,
       this.textStyle,
       this.onTap,
       this.deleteItem,
-      this.tapOnIcon});
+      this.tapOnCircle});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         IconButton(
-          onPressed: () => tapOnIcon,
-          icon: Icon(icon ?? Icons.circle),
+          onPressed: tapOnCircle,
+          icon: Icon(Icons.circle),
           iconSize: 17,
-          color: iconColor,
+          color: circleColor,
         ),
         SizedBox(
           width: 10,

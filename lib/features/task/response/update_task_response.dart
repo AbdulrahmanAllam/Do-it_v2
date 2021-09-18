@@ -1,37 +1,19 @@
 import 'dart:convert';
+
 import 'package:do_it_flutter_v2/services/remote/api/base_response.dart';
 
-class GetTasksListResponse implements BaseResponse{
-
-  List<GetTasksListResponseTasks>? tasks;
-
-  @override
-  fromJson(String response) {
-    tasks = List<GetTasksListResponseTasks>.from(json.decode(response).map((x) => GetTasksListResponseTasks.fromJson(x)));
-  }
-
-  
-  String toJson() {
-    String data = "";
-    data = json.encode(List<dynamic>.from(tasks!.map((x) => x.toJson())));
-    return data;
-  }
-
-
-}
-
-class GetTasksListResponseTasks {
+class UpdateTaskResponse implements BaseResponse{
   int? id;
   String? title;
   bool? done;
-  String? description;
+  Null description;
   String? userId;
-  GetTasksListResponseCategory? category;
+  UpdateTaskResponseCategory? category;
   String? publishedAt;
   String? createdAt;
   String? updatedAt;
 
-  GetTasksListResponseTasks(
+  UpdateTaskResponse(
       {this.id,
       this.title,
       this.done,
@@ -42,13 +24,14 @@ class GetTasksListResponseTasks {
       this.createdAt,
       this.updatedAt});
 
-  GetTasksListResponseTasks.fromJson(Map<String, dynamic> json) {
+  fromJson(String response) {
+    Map<String, dynamic> json = jsonDecode(response);
     id = json['id'];
     title = json['title'];
     done = json['done'];
     description = json['description'];
     userId = json['user_id'];
-    category = GetTasksListResponseCategory.fromJson(json['category']);
+    category = UpdateTaskResponseCategory.fromJson(json['category']);
     publishedAt = json['published_at'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -62,7 +45,6 @@ class GetTasksListResponseTasks {
     data['description'] = this.description;
     data['user_id'] = this.userId;
       data['category'] = this.category?.toJson();
-    
     data['published_at'] = this.publishedAt;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
@@ -70,7 +52,7 @@ class GetTasksListResponseTasks {
   }
 }
 
-class GetTasksListResponseCategory {
+class UpdateTaskResponseCategory {
   int? id;
   String? name;
   String? color;
@@ -79,7 +61,7 @@ class GetTasksListResponseCategory {
   String? createdAt;
   String? updatedAt;
 
-  GetTasksListResponseCategory(
+  UpdateTaskResponseCategory(
       {this.id,
       this.name,
       this.color,
@@ -88,7 +70,7 @@ class GetTasksListResponseCategory {
       this.createdAt,
       this.updatedAt});
 
-  GetTasksListResponseCategory.fromJson(Map<String, dynamic> json) {
+  UpdateTaskResponseCategory.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     color = json['color'];

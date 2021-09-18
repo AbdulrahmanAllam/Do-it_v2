@@ -1,17 +1,40 @@
+import 'package:do_it_flutter_v2/features/category/category.dart';
+import 'package:do_it_flutter_v2/features/task/response/update_task_response.dart';
 import 'package:do_it_flutter_v2/services/remote/api/http_services.dart';
 import 'package:flutter/material.dart';
 
-class Task{
+class Task {
+HttpServices _httpServices = HttpServices.singleton;
+
   late int _id;
   late String _title;
   late bool _done;
+  Category? _category;
 
-  Task({required int id, required String title, required bool done})
-    :_title = title, _done = done, _id = id;
+  Task(
+      {required int id,
+      required String title,
+      required bool done,
+      Category? category})
+      : _title = title,
+        _done = done,
+        _id = id,
+        _category = category;
 
-  
-  add(){}
-  check(){}
+  update() {}
+
+  Future<void> check() async {
+    bool status = !this._done;
+    Map<String, String> body = {"done": "$status"};
+  print("kkkkk");
+    await _httpServices.put<UpdateTaskResponse>(
+        endpoint: "tasks/${this._id}",
+        requestName: "Check Task",
+        responseModel: UpdateTaskResponse(),
+        body: body);
+  }
+
+  delete() {}
 
   String get title => _title;
   set title(String v) => _title = v;
@@ -21,4 +44,7 @@ class Task{
 
   int get id => _id;
   set id(int v) => _id = v;
+
+  Category? get category => _category;
+  set category(Category? v) => _category = v;
 }

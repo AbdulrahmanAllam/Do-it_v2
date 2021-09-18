@@ -1,28 +1,40 @@
 import 'package:do_it_flutter_v2/features/user/responses/sign_in_response.dart';
+import 'package:do_it_flutter_v2/features/user/responses/sign_up_response.dart';
+import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_preferences_keys.dart';
 import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_preferences_services.dart';
 import 'package:do_it_flutter_v2/services/remote/api/http_services.dart';
-import 'package:do_it_flutter_v2/utils/constants/constants_key.dart';
+import 'package:do_it_flutter_v2/utils/log.dart';
 import 'package:flutter/material.dart';
 
 class User {
-  static final HttpServices _httpServices = HttpServices();
+  final HttpServices _httpServices = HttpServices.singleton;
+  final SharedPreferencesServices _sharedPreferencesServices =
+      SharedPreferencesServices.singleton;
 
   User._();
 
   static final User singleton = User._();
 
-
-  String? _name;
+  int _id = 0;
+  late String _name;
   late String _email;
   late String _password;
+
+  String? validateName(String name) {
+    if (name.isEmpty) {
+      return "this field is required";
+    } else if (name.length < 1) {
+      return "name can't less than two letters";
+    }
+  }
 
   String? validateEmail(String email) {
     bool emailValid = RegExp(r"[a-zA-Z0-9_-]+@[a-z]+\.[a-z]").hasMatch(email);
     if (email.isEmpty) {
-      return "email required";
+      return "this field is required";
     } else if (!emailValid || email.contains(" ")) {
       return "email not valid";
-    }else{
+    } else {
       _email = email;
     }
   }
@@ -32,39 +44,80 @@ class User {
       return "this field is required";
     } else if (password.length < 6) {
       return "password length must be 6 or more";
-    }else{
+    } else {
       _password = password;
     }
   }
 
+  save({required int id, required String jwt}) async {
+    _id = id;
+    await _sharedPreferencesServices.setInt(
+        key: SharedPreferencesKeys.userId, value: id);
+    await _sharedPreferencesServices.setString(
+        key: SharedPreferencesKeys.jwt, value: jwt);
+  }
+
+  // check if user is sorted
+  check({Function()? found, Function()? notFound}) async {
+    int? id = await _sharedPreferencesServices.getInt(key: SharedPreferencesKeys.userId);
+    String? jwt = await _sharedPreferencesServices.getString(key: SharedPreferencesKeys.jwt);
+
+    if (id == null && jwt == null) {
+      if(notFound != null) notFound();
+    } else {
+      _id = id!;
+      if(found != null) found();
+    }
+  }
+
   Future<void> signIn(
-      {required BuildContext context,
-      Function(SignInResponse)? onSuccess,
+      {Function(SignInResponse)? onSuccess,
       Function(int)? onError,
       Function()? onConnectionError}) async {
     Map<String, String> body = {
       "identifier": "$_email",
       "password": "$_password",
     };
-    await _httpServices.post<SignInResponse>(
-      endpoint: "auth/local",
-      requestName: "Sign In",
-      responseModel: SignInResponse(),
-      context: context,
-      body: body,
-      onSuccess: onSuccess,
-      onError: onError,
-      onConnectionError: onConnectionError,
-      // onSuccess: (data){
-      //   SharedPreferencesServices.setInt(key: ConstantsKey.userId, value: data.user?.id ?? 0);
-      //   SharedPreferencesServices.setString(key: ConstantsKey.jwt, value: data.jwt ?? "");
-      // }
-    );
+    if (_email.isEmpty || _password.isEmpty) {
+      Log.error("email and password required");
+    } else {
+      await _httpServices.post<SignInResponse>(
+        endpoint: "auth/local",
+        requestName: "Sign In",
+        responseModel: SignInResponse(),
+        body: body,
+        onSuccess: onSuccess,
+        onError: onError,
+        onConnectionError: onConnectionError,
+      );
+    }
   }
 
-  signUp() {}
+  Future<void> signUp(
+      {Function(SignUpResponse)? onSuccess,
+      Function(int)? onError,
+      Function()? onConnectionError}) async {
+    Map<String, String> body = {
+      "username": "$_name",
+      "email": "$_email",
+      "password": "$_password",
+    };
+    if (_name.isEmpty || _email.isEmpty || _password.isEmpty) {
+      Log.error("name , password and email are required");
+    } else {
+      await _httpServices.post<SignUpResponse>(
+        endpoint: "auth/local/register",
+        requestName: "Sign Up",
+        responseModel: SignUpResponse(),
+        body: body,
+        onSuccess: onSuccess,
+        onError: onError,
+        onConnectionError: onConnectionError,
+      );
+    }
+  }
 
-  // set name(String v) => _name = v;
-  // set email(String v) => _email = v;
-  // set password(String v) => _password = v;
+  logOut(){}
+
+  int get id => _id;
 }
