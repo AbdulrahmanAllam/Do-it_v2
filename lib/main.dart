@@ -1,6 +1,7 @@
 import 'package:do_it_flutter_v2/layouts/splash_screen.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:flutter/material.dart';
+
 import 'utils/app_colors.dart';
 
 void main() {

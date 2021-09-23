@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_preferences_keys.dart';
-import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_preferences_services.dart';
+
+import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:do_it_flutter_v2/services/remote/api/base_response.dart';
 import 'package:do_it_flutter_v2/utils/log.dart';
 import 'package:do_it_flutter_v2/widgets/custom_snack_bar.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class HttpServices {
@@ -15,15 +14,10 @@ class HttpServices {
 
   final String _baseUrl = "http://192.168.1.6:1337/";
 
-  Future<Map<String, String>> _defaultHeader() async {
-    String jwt = await SharedPreferencesServices.singleton
-            .getString(key: SharedPreferencesKeys.jwt) ??
-        '';
-    Map<String, String> map = {"Authorization": "Bearer $jwt"};
+  Map<String, String> _defaultHeader() {
+    Map<String, String> map = {"Authorization": "Bearer ${User.jwt}"};
     return map;
   }
-
- 
 
   Future<void> _request<T>(
       {required Future<http.Response> futureResponse,
@@ -63,7 +57,7 @@ class HttpServices {
     Uri url = Uri.parse(_baseUrl + endpoint);
 
     if (headers == null) {
-      headers = await _defaultHeader();
+      headers = _defaultHeader();
     }
 
     await _request<T>(
@@ -110,7 +104,7 @@ class HttpServices {
     Uri url = Uri.parse(_baseUrl + endpoint);
 
     if (headers == null) {
-      headers = await _defaultHeader();
+      headers = _defaultHeader();
     }
 
     await _request<T>(

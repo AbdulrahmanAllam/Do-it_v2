@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'package:do_it_flutter_v2/features/tasks/ui/tasks_list/tasks_list_screen.dart';
-import 'package:do_it_flutter_v2/features/user/ui/sign_in/sign_in_screen.dart';
-import 'package:do_it_flutter_v2/features/user/user.dart';
-import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_preferences_keys.dart';
-import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_preferences_services.dart';
+import 'package:do_it_flutter_v2/objects/tasks/view/tasks_list/tasks_list_screen.dart';
+import 'package:do_it_flutter_v2/objects/user/ui/sign_in/sign_in_screen.dart';
+import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:do_it_flutter_v2/utils/app_images.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +15,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  late SharedPreferencesServices _preferencesServices;
+  late User _user;
 
   @override
   void initState() {
-    _preferencesServices = SharedPreferencesServices.singleton;
+    _user = User();
     Timer(
       Duration(seconds: 3),
       _goTo,
@@ -42,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _goTo() async {
-    User.singleton.check(
+    _user.check(
       found: (){
         Navigator.pushReplacementNamed(context, TasksListScreen.route);
       },
