@@ -1,7 +1,9 @@
 import 'package:do_it_flutter_v2/objects/task/task.dart';
+import 'package:do_it_flutter_v2/objects/task/ui/add_task/add_task_screen.dart';
 import 'package:do_it_flutter_v2/objects/tasks/view/tasks_list/tasks_list_provider.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:do_it_flutter_v2/utils/log.dart';
+import 'package:do_it_flutter_v2/widgets/adding_floating_action_button.dart';
 import 'package:do_it_flutter_v2/widgets/custom_app_bar.dart';
 import 'package:do_it_flutter_v2/widgets/custom_item_widget.dart';
 import 'package:flutter/material.dart';
@@ -21,17 +23,28 @@ class TasksListScreen extends StatelessWidget {
         appBar: customAppBar(title: "Your Tasks"),
         body: Consumer<TasksListProvider>(
           builder: (context, provider, child) {
-            return FutureBuilder<List<Task>?>(
+            // TODO: make custom future builder
+            return FutureBuilder<int?>(
               future: provider.getTasks(context: context),
-              builder: (context, AsyncSnapshot<List<Task>?> snapshot) {
-                if (snapshot.hasData && snapshot.data != null) {
-                  return TasksListWidget(tasks: snapshot.data);
+              builder: (context, AsyncSnapshot<int?> snapshot) {
+                if(snapshot.hasData && snapshot.data != null){
+                  return TasksListWidget();
                 }
-                return Center(
-                  child: Text("loading..."),
-                );
+                else if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator(),);
+                }
+                else if(snapshot.hasError){
+                  Log.error("${snapshot.error}");
+                  return Center(child: Text("Error !"));
+                }
+                return Center(child: Text("you don't have tasks"),);
               },
             );
+          },
+        ),
+        floatingActionButton: AddingFloatingActionButton(
+          onPressed: (){
+            Navigator.pushNamed(context, AddTaskScreen.route);
           },
         ),
       ),

@@ -6,6 +6,7 @@ import 'package:do_it_flutter_v2/services/remote/api/base_response.dart';
 import 'package:do_it_flutter_v2/utils/log.dart';
 import 'package:do_it_flutter_v2/widgets/custom_snack_bar.dart';
 import 'package:http/http.dart' as http;
+import 'package:overlay_support/overlay_support.dart';
 
 class HttpServices {
   HttpServices._();
@@ -41,7 +42,7 @@ class HttpServices {
       if (onConnectionError != null) {
         onConnectionError();
       } else {
-        CustomSnacBar(message: "check your internet connection");
+        toast("check your internet connection");
       }
     }
   }

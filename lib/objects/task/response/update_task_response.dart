@@ -6,7 +6,7 @@ class UpdateTaskResponse implements BaseResponse{
   int? id;
   String? title;
   bool? done;
-  Null description;
+  String? description;
   String? userId;
   UpdateTaskResponseCategory? category;
   String? publishedAt;

@@ -9,16 +9,19 @@ HttpServices _httpServices = HttpServices.singleton;
   late int _id;
   late String _title;
   late bool _done;
+  String? _description;
   Category? _category;
 
   Task(
       {required int id,
       required String title,
       required bool done,
+        String? description,
       Category? category})
       : _title = title,
         _done = done,
         _id = id,
+  _description = description,
         _category = category;
 
   update() {}
@@ -26,7 +29,6 @@ HttpServices _httpServices = HttpServices.singleton;
   Future<void> check() async {
     bool status = !this._done;
     Map<String, String> body = {"done": "$status"};
-  print("kkkkk");
     await _httpServices.put<UpdateTaskResponse>(
         endpoint: "tasks/${this._id}",
         requestName: "Check Task",
@@ -34,7 +36,9 @@ HttpServices _httpServices = HttpServices.singleton;
         body: body);
   }
 
-  delete() {}
+  Future<void> delete() async {
+    // TODO: add delete to http services
+  }
 
   String get title => _title;
   set title(String v) => _title = v;

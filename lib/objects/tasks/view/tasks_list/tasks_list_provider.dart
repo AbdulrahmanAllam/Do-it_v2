@@ -4,11 +4,23 @@ import 'package:flutter/material.dart';
 import '../../tasks.dart';
 
 class TasksListProvider extends ChangeNotifier {
-  Tasks _tasks = Tasks();
+  Tasks _tasksObject = Tasks();
+  List<Task>? _tasks;
 
-  Future<List<Task>?> getTasks({required BuildContext context}) async {
-    return await _tasks.getTasks();
+  Future<int?> getTasks({required BuildContext context}) async {
+    int? status;
+    await _tasksObject.getTasks().then(
+      (value) {
+        if (value != null && value.isNotEmpty) {
+          status = 1;
+          _tasks = value;
+        }
+      },
+    );
+    return status;
   }
 
+  void refresh() => notifyListeners();
 
+  List<Task>? get tasks => _tasks;
 }

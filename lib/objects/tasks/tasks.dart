@@ -22,6 +22,7 @@ class Tasks {
       requestName: "Get All Tasks",
       responseModel: GetTasksListResponse(),
       onSuccess: (data) {
+        _task?.clear();
         data.tasks?.forEach((element) {
           if (int.parse(element.userId ?? "0") == User.id) {
             _task?.add(Task(
