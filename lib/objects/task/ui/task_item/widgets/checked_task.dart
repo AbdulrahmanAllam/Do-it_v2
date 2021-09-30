@@ -21,8 +21,8 @@ class CheckedTask extends StatelessWidget {
       tapOnCircle: () {
         taskProvider.check().then((value) => tasksProvider.refresh());
       },
-      deleteItem: (){
-        taskProvider;
+      deleteItem: () async {
+        await taskProvider.delete().then((value) => tasksProvider.refresh());
       },
     );
   }

@@ -9,10 +9,6 @@ import '../task_item_provider.dart';
 
 class UncheckedTask extends StatelessWidget {
 
-  // late Task _task;
-  //
-  // UncheckedTask({required Task task}):_task = task;
-
   @override
   Widget build(BuildContext context) {
     final taskProvider = Provider.of<TaskItemProvider>(context, listen: false);
@@ -22,6 +18,10 @@ class UncheckedTask extends StatelessWidget {
         circleColor: Color(taskProvider.color),
         tapOnCircle: () {
           taskProvider.check().then((value) => tasksProvider.refresh());
-        });
+        },
+        deleteItem: () async {
+          await taskProvider.delete().then((value) => tasksProvider.refresh());
+        },
+    );
   }
 }

@@ -1,10 +1,10 @@
-
 import 'package:do_it_flutter_v2/objects/category/category.dart';
+import 'package:do_it_flutter_v2/objects/task/response/delete_task_response.dart';
 import 'package:do_it_flutter_v2/objects/task/response/update_task_response.dart';
 import 'package:do_it_flutter_v2/services/remote/api/http_services.dart';
 
 class Task {
-HttpServices _httpServices = HttpServices.singleton;
+  HttpServices _httpServices = HttpServices.singleton;
 
   late int _id;
   late String _title;
@@ -16,12 +16,12 @@ HttpServices _httpServices = HttpServices.singleton;
       {required int id,
       required String title,
       required bool done,
-        String? description,
+      String? description,
       Category? category})
       : _title = title,
         _done = done,
         _id = id,
-  _description = description,
+        _description = description,
         _category = category;
 
   update() {}
@@ -36,8 +36,16 @@ HttpServices _httpServices = HttpServices.singleton;
         body: body);
   }
 
-  Future<void> delete() async {
-
+  Future<void> delete({Function(DeleteTaskResponse)? onSuccess, Function(int)? onError, Function()? onConnectionError}) async {
+    print("delelelelleell");
+    await _httpServices.delete<DeleteTaskResponse>(
+        endpoint: "tasks/${this._id}",
+        requestName: "Delete Task",
+        responseModel: DeleteTaskResponse(),
+        onSuccess: onSuccess,
+        onError: onError,
+        onConnectionError: onConnectionError,
+    );
   }
 
   String get title => _title;

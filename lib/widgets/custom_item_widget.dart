@@ -39,7 +39,7 @@ class CustomItemWidget extends StatelessWidget {
         ),
         AppWidth.expanded,
         IconButton(
-          onPressed: () => deleteItem,
+          onPressed: deleteItem,
           icon: Icon(Icons.close),
           iconSize: 17,
         ),
