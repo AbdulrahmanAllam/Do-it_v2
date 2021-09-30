@@ -117,4 +117,30 @@ class HttpServices {
         onError: onError,
         responseModel: responseModel);
   }
+
+  Future<void> delete<T>(
+      {required String endpoint,
+        required String requestName,
+        required BaseResponse responseModel,
+        Map<String, String>? headers,
+        Object? body,
+        Encoding? encoding,
+        Function(T data)? onSuccess,
+        Function(int)? onError,
+        Function()? onConnectionError}) async {
+    Uri url = Uri.parse(_baseUrl + endpoint);
+
+    if (headers == null) {
+      headers = _defaultHeader();
+    }
+
+    await _request<T>(
+        futureResponse:
+        http.delete(url, headers: headers, body: body, encoding: encoding),
+        requestName: requestName,
+        onSuccess: onSuccess,
+        onConnectionError: onConnectionError,
+        onError: onError,
+        responseModel: responseModel);
+  }
 }

@@ -37,7 +37,7 @@ HttpServices _httpServices = HttpServices.singleton;
   }
 
   Future<void> delete() async {
-    // TODO: add delete to http services
+
   }
 
   String get title => _title;
