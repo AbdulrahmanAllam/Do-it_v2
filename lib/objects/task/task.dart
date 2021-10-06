@@ -1,6 +1,8 @@
 import 'package:do_it_flutter_v2/objects/category/category.dart';
+import 'package:do_it_flutter_v2/objects/task/response/add_task_response.dart';
 import 'package:do_it_flutter_v2/objects/task/response/delete_task_response.dart';
 import 'package:do_it_flutter_v2/objects/task/response/update_task_response.dart';
+import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:do_it_flutter_v2/services/remote/api/http_services.dart';
 
 class Task {
@@ -9,14 +11,14 @@ class Task {
   late int _id;
   late String _title;
   late bool _done;
-  String? _description;
+  String _description;
   Category? _category;
 
   Task(
       {required int id,
       required String title,
       required bool done,
-      String? description,
+      required String description,
       Category? category})
       : _title = title,
         _done = done,
@@ -25,6 +27,24 @@ class Task {
         _category = category;
 
   update() {}
+
+  Future<void> add({Function(AddTaskResponse)? onSuccess, Function(int)? onError, Function()? onConnectionError}) async {
+    Map<String, String> body = {
+      "title": this._title,
+      "description": this._description,
+      "category": this._category?.id.toString()??"0",
+      "user_id": User.id.toString(),
+    };
+    await _httpServices.post<AddTaskResponse>(
+      endpoint: "tasks",
+      requestName: "Add Task",
+      responseModel: AddTaskResponse(),
+      body: body,
+      onSuccess: onSuccess,
+      onError: onError,
+      onConnectionError: onConnectionError,
+    );
+  }
 
   Future<void> check() async {
     bool status = !this._done;
@@ -49,13 +69,24 @@ class Task {
   }
 
   String get title => _title;
-  set title(String v) => _title = v;
+  String? setTitle(String v) {
+    if(v.isEmpty){
+      return "this field is required";
+    }else{
+      _title = v;
+    }
+  }
 
   bool get done => _done;
   set done(bool v) => _done = v;
 
   int get id => _id;
   set id(int v) => _id = v;
+
+  String get description => _description;
+  String? setDescription(String v) {
+    _description = v;
+  }
 
   Category? get category => _category;
   set category(Category? v) => _category = v;

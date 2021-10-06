@@ -1,5 +1,5 @@
 import 'package:do_it_flutter_v2/objects/tasks/view/tasks_list/tasks_list_screen.dart';
-import 'package:do_it_flutter_v2/objects/user/ui/user_utils/validator.dart';
+import 'package:do_it_flutter_v2/objects/user/user_utils/user_validator.dart';
 import 'package:flutter/material.dart';
 
 import '../../user.dart';
@@ -11,11 +11,11 @@ class SignUpProvider extends ChangeNotifier {
   String _email = "";
   String _password = "";
 
-  String? validateEmail(String email) => Validator.validateEmail(email);
+  String? validateEmail(String email) => UserValidator.validateEmail(email);
 
-  String? validatePassword(String password) => Validator.validatePassword(password);
+  String? validatePassword(String password) => UserValidator.validatePassword(password);
 
-  String? validateName(String name) => Validator.validateName(name);
+  String? validateName(String name) => UserValidator.validateName(name);
 
 
 

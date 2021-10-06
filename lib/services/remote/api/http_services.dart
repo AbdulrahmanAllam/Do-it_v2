@@ -82,6 +82,10 @@ class HttpServices {
       Function()? onConnectionError}) async {
     Uri url = Uri.parse(_baseUrl + endpoint);
 
+    if (headers == null) {
+      headers = _defaultHeader();
+    }
+
     await _request<T>(
         futureResponse:
             http.post(url, headers: headers, body: body, encoding: encoding),

@@ -1,4 +1,4 @@
-class Validator{
+class UserValidator{
   static String? validateEmail(String email) {
     bool emailValid = RegExp(r"[a-zA-Z0-9_-]+@[a-z]+\.[a-z]").hasMatch(email);
     if (email.isEmpty) {

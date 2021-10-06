@@ -1,10 +1,10 @@
 import 'package:do_it_flutter_v2/objects/user/ui/sign_up/sign_up_screen.dart';
-import 'package:do_it_flutter_v2/objects/user/ui/user_utils/widgets/email_field.dart';
-import 'package:do_it_flutter_v2/objects/user/ui/user_utils/widgets/logo.dart';
-import 'package:do_it_flutter_v2/objects/user/ui/user_utils/widgets/or_divider.dart';
-import 'package:do_it_flutter_v2/objects/user/ui/user_utils/widgets/password_field.dart';
-import 'package:do_it_flutter_v2/objects/user/ui/user_utils/widgets/sign_in_button.dart';
-import 'package:do_it_flutter_v2/objects/user/ui/user_utils/widgets/sign_up_button.dart';
+import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/email_field.dart';
+import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/logo.dart';
+import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/or_divider.dart';
+import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/password_field.dart';
+import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/sign_in_button.dart';
+import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/sign_up_button.dart';
 import 'package:do_it_flutter_v2/utils/app_height.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:do_it_flutter_v2/widgets/custom_app_bar.dart';
@@ -50,7 +50,6 @@ class SignInScreen extends StatelessWidget {
                     AppHeight.h50,
                     SignInButton(onPressed: () {
                       provider.signIn(context: context);
-                      // CustomSnacBar(message: "message");
                     }),
                     OrDivider(),
                     SignUpButton(onPressed: () {

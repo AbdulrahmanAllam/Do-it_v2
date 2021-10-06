@@ -1,4 +1,5 @@
 import 'package:do_it_flutter_v2/objects/category/category.dart';
+import 'package:do_it_flutter_v2/objects/task/response/add_task_response.dart';
 import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:do_it_flutter_v2/services/remote/api/http_services.dart';
 import 'package:flutter/material.dart';
@@ -9,23 +10,22 @@ import 'responses/get_tasks_list_response.dart';
 class Tasks {
   HttpServices _httpServices = HttpServices.singleton;
 
-  List<Task>? _task = [];
+  List<Task>? _tasks = [];
 
-  add(Task task) {}
+
 
   Future<List<Task>?> getTasks(
-      {
-      Function(int)? onError,
-      Function()? onConnectionError}) async {
+      {Function(int)? onError, Function()? onConnectionError}) async {
     await _httpServices.get<GetTasksListResponse>(
       endpoint: "tasks",
       requestName: "Get All Tasks",
       responseModel: GetTasksListResponse(),
       onSuccess: (data) {
-        _task?.clear();
+        _tasks?.clear();
         data.tasks?.forEach((element) {
           if (int.parse(element.userId ?? "0") == User.id) {
-            _task?.add(Task(
+            _tasks?.add(Task(
+              description: "",
               id: element.id ?? 0,
               title: element.title ?? "",
               done: element.done ?? false,
@@ -40,6 +40,6 @@ class Tasks {
       onError: onError,
       onConnectionError: onConnectionError,
     );
-    return _task;
+    return _tasks;
   }
 }

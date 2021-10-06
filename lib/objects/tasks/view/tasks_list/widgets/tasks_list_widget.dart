@@ -1,4 +1,5 @@
 import 'package:do_it_flutter_v2/objects/task/task.dart';
+import 'package:do_it_flutter_v2/objects/task/ui/add_task/add_task_screen.dart';
 import 'package:do_it_flutter_v2/objects/task/ui/task_item/task_item_provider.dart';
 import 'package:do_it_flutter_v2/objects/task/ui/task_item/task_item_widget.dart';
 import 'package:do_it_flutter_v2/objects/tasks/view/tasks_list/tasks_list_provider.dart';
@@ -15,7 +16,7 @@ class TasksListWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: (){
-            //TODO: go to task screen
+            //TODO: go to update task screen
           },
           child: ChangeNotifierProxyProvider<TasksListProvider, TaskItemProvider>(
             create: (_) => TaskItemProvider(),

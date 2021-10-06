@@ -37,7 +37,9 @@ class TasksListScreen extends StatelessWidget {
                   Log.error("${snapshot.error}");
                   return Center(child: Text("Error !"));
                 }
-                return Center(child: Text("you don't have tasks"),);
+                return GestureDetector(
+                    onTap: () => provider.refresh(),
+                    child: Center(child: Text("you don't have tasks"),));
               },
             );
           },

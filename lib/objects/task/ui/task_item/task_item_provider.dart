@@ -8,7 +8,7 @@ class TaskItemProvider extends ChangeNotifier{
 
   TaskItemProvider({Task? task}){
     if(task == null){
-      _task = Task(id: 0, done: false,title: "fake",);
+      _task = Task(id: 0, done: false,title: "fake",description: "");
     }else{
       _task = task;
     }
@@ -28,7 +28,7 @@ class TaskItemProvider extends ChangeNotifier{
 
   set task(Task? v) {
     if(v == null){
-      _task = Task(id: 0, done: false,title: "fake",);
+      _task = Task(id: 0, done: false,title: "fake",description: "");
     }else{
       _task = v;
     }
