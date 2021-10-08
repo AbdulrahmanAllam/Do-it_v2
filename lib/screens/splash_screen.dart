@@ -15,11 +15,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  late User _user;
 
   @override
   void initState() {
-    _user = User();
     Timer(
       Duration(seconds: 3),
       _goTo,
@@ -40,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _goTo() async {
-    _user.check(
+    User.check(
       found: (){
         Navigator.pushReplacementNamed(context, TasksListScreen.route);
       },

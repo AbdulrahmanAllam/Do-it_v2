@@ -13,10 +13,9 @@ class SignInProvider extends ChangeNotifier {
 
   Future<void> signIn({required BuildContext context}) async {
     if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
       await _user.signIn(
         onSuccess: (data) async {
-          _user.save(id: data.user?.id??0, jwt: data.jwt??"");
+          User.save(id: data.user?.id??0, jwt: data.jwt??"");
           Navigator.pushReplacementNamed(context, TasksListScreen.route);
         },
       );

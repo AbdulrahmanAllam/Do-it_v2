@@ -37,8 +37,6 @@ dependencies:
   # for cache
   shared_preferences:
 
-  overlay_support:
-
 
 dev_dependencies:
   flutter_test:

@@ -39,6 +39,7 @@ class Task {
       endpoint: "tasks",
       requestName: "Add Task",
       responseModel: AddTaskResponse(),
+      headers: _httpServices.defaultHeader,
       body: body,
       onSuccess: onSuccess,
       onError: onError,

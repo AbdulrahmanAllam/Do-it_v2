@@ -1,15 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:do_it_flutter_v2/main.dart';
 import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:do_it_flutter_v2/services/remote/api/base_response.dart';
 import 'package:do_it_flutter_v2/utils/log.dart';
 import 'package:do_it_flutter_v2/widgets/custom_snack_bar.dart';
-import 'package:do_it_flutter_v2/widgets/mes.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:overlay_support/overlay_support.dart';
 
 class HttpServices {
   HttpServices._();
@@ -18,7 +13,7 @@ class HttpServices {
 
   final String _baseUrl = "http://192.168.1.6:1337/";
 
-  Map<String, String> _defaultHeader() {
+  Map<String, String> get defaultHeader {
     Map<String, String> map = {"Authorization": "Bearer ${User.jwt}"};
     return map;
   }
@@ -62,7 +57,7 @@ class HttpServices {
     Uri url = Uri.parse(_baseUrl + endpoint);
 
     if (headers == null) {
-      headers = _defaultHeader();
+      headers = defaultHeader;
     }
 
     await _request<T>(
@@ -85,10 +80,7 @@ class HttpServices {
       Function(int)? onError,
       Function()? onConnectionError}) async {
     Uri url = Uri.parse(_baseUrl + endpoint);
-
-    if (headers == null) {
-      headers = _defaultHeader();
-    }
+    
 
     await _request<T>(
         futureResponse:
@@ -113,7 +105,7 @@ class HttpServices {
     Uri url = Uri.parse(_baseUrl + endpoint);
 
     if (headers == null) {
-      headers = _defaultHeader();
+      headers = defaultHeader;
     }
 
     await _request<T>(
@@ -139,7 +131,7 @@ class HttpServices {
     Uri url = Uri.parse(_baseUrl + endpoint);
 
     if (headers == null) {
-      headers = _defaultHeader();
+      headers = defaultHeader;
     }
 
     await _request<T>(

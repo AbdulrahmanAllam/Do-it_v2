@@ -19,7 +19,7 @@ class SignUpProvider extends ChangeNotifier {
     if (_formKey.currentState!.validate()) {
       await _user.signUp(
         onSuccess: (data) async {
-          _user.save(id: data.user?.id??0, jwt: data.jwt??"");
+          User.save(id: data.user?.id??0, jwt: data.jwt??"");
           Navigator.pushReplacementNamed(context, TasksListScreen.route);
         },
       );

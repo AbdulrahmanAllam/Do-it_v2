@@ -7,17 +7,17 @@ import 'package:do_it_flutter_v2/utils/log.dart';
 
 class User {
   final HttpServices _httpServices = HttpServices.singleton;
-  final SharedPreferencesServices _sharedPreferencesServices =
+  static final SharedPreferencesServices _sharedPreferencesServices =
       SharedPreferencesServices.singleton;
 
   static int _id = 0;
   static String _jwt = "";
-  late String name;
-  late String email;
-  late String password;
+  late String _name;
+  late String _email;
+  late String _password;
 
 
-  void save({required int id, required String jwt}) async {
+  static void save({required int id, required String jwt}) async {
     _id = id;
     _jwt = jwt;
     await _sharedPreferencesServices.setInt(
@@ -27,7 +27,7 @@ class User {
   }
 
   // check if user is sorted
-  void check({Function()? found, Function()? notFound}) async {
+  static void check({Function()? found, Function()? notFound}) async {
     int? id = await _sharedPreferencesServices.getInt(
         key: SharedPreferencesKeys.userId);
     String? jwt = await _sharedPreferencesServices.getString(
@@ -48,10 +48,10 @@ class User {
       Function(int)? onError,
       Function()? onConnectionError}) async {
     Map<String, String> body = {
-      "identifier": "$email",
-      "password": "$password",
+      "identifier": "$_email",
+      "password": "$_password",
     };
-    if (email.isEmpty || password.isEmpty) {
+    if (_email.isEmpty || _password.isEmpty) {
       Log.error("email and password required");
     } else {
       await _httpServices.post<SignInResponse>(
@@ -72,11 +72,11 @@ class User {
       Function(int)? onError,
       Function()? onConnectionError}) async {
     Map<String, String> body = {
-      "username": "$name",
-      "email": "$email",
-      "password": "$password",
+      "username": "$_name",
+      "email": "$_email",
+      "password": "$_password",
     };
-    if (name.isEmpty || email.isEmpty || password.isEmpty) {
+    if (_name.isEmpty || _email.isEmpty || _password.isEmpty) {
       Log.error("name , password and email are required");
     } else {
       await _httpServices.post<SignUpResponse>(
@@ -91,7 +91,7 @@ class User {
     }
   }
 
-  static logOut() {}
+  static void logOut() {}
 
   String? setEmail(String email) {
     bool emailValid = RegExp(r"[a-zA-Z0-9_-]+@[a-z]+\.[a-z]").hasMatch(email);
@@ -100,6 +100,9 @@ class User {
     } else if (!emailValid || email.contains(" ")) {
       return "email not valid";
     }
+    else{
+      this._email = email;
+    }
   }
 
   String? setPassword(String password) {
@@ -107,6 +110,8 @@ class User {
       return "this field is required";
     } else if (password.length < 6) {
       return "password length must be 6 or more";
+    }else{
+      this._password = password;
     }
   }
 
@@ -115,6 +120,9 @@ class User {
       return "this field is required";
     } else if (name.length < 1) {
       return "name can't less than two letters";
+    }
+    else{
+      this._name = name;
     }
   }
 
