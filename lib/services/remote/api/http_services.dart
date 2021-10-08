@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:do_it_flutter_v2/main.dart';
 import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:do_it_flutter_v2/services/remote/api/base_response.dart';
 import 'package:do_it_flutter_v2/utils/log.dart';
 import 'package:do_it_flutter_v2/widgets/custom_snack_bar.dart';
+import 'package:do_it_flutter_v2/widgets/mes.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:overlay_support/overlay_support.dart';
 
@@ -42,7 +45,8 @@ class HttpServices {
       if (onConnectionError != null) {
         onConnectionError();
       } else {
-        toast("check your internet connection");
+        // toast("check your internet connection");
+        customSnackBar(text: "fhdal");
       }
     }
   }

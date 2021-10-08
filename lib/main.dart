@@ -12,26 +12,45 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   @override
   Widget build(BuildContext context) {
+
     return ChangeNotifierProvider<TasksListProvider>(
       create: (_) => TasksListProvider(),
-      child: OverlaySupport.global(
-        child: MaterialApp(
-          theme: ThemeData(
-              appBarTheme: AppBarTheme(
-                iconTheme: IconThemeData(color: AppColors.black),
-                color: AppColors.white,
-                elevation: 0,
-              ),
-              floatingActionButtonTheme: FloatingActionButtonThemeData(
-                backgroundColor: AppColors.black,
-                elevation: 0.0,
-              ),
-              scaffoldBackgroundColor: AppColors.white),
-          initialRoute: SplashScreen.route,
-          routes: AppRouter.routes,
-        ),
+      // child: OverlaySupport.global(
+      //   child: MaterialApp(
+      //     scaffoldMessengerKey: rootScaffoldMessengerKey,
+      //     theme: ThemeData(
+      //         appBarTheme: AppBarTheme(
+      //           iconTheme: IconThemeData(color: AppColors.black),
+      //           color: AppColors.white,
+      //           elevation: 0,
+      //         ),
+      //         floatingActionButtonTheme: FloatingActionButtonThemeData(
+      //           backgroundColor: AppColors.black,
+      //           elevation: 0.0,
+      //         ),
+      //         scaffoldBackgroundColor: AppColors.white),
+      //     initialRoute: SplashScreen.route,
+      //     routes: AppRouter.routes,
+      //   ),
+      // ),
+      child: MaterialApp(
+        scaffoldMessengerKey: rootScaffoldMessengerKey,
+        theme: ThemeData(
+            appBarTheme: AppBarTheme(
+              iconTheme: IconThemeData(color: AppColors.black),
+              color: AppColors.white,
+              elevation: 0,
+            ),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              backgroundColor: AppColors.black,
+              elevation: 0.0,
+            ),
+            scaffoldBackgroundColor: AppColors.white),
+        initialRoute: SplashScreen.route,
+        routes: AppRouter.routes,
       ),
     );
   }
