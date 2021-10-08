@@ -12,9 +12,12 @@ class User {
 
   static int _id = 0;
   static String _jwt = "";
+  late String name;
+  late String email;
+  late String password;
 
 
-  save({required int id, required String jwt}) async {
+  void save({required int id, required String jwt}) async {
     _id = id;
     _jwt = jwt;
     await _sharedPreferencesServices.setInt(
@@ -24,7 +27,7 @@ class User {
   }
 
   // check if user is sorted
-  check({Function()? found, Function()? notFound}) async {
+  void check({Function()? found, Function()? notFound}) async {
     int? id = await _sharedPreferencesServices.getInt(
         key: SharedPreferencesKeys.userId);
     String? jwt = await _sharedPreferencesServices.getString(
@@ -40,8 +43,7 @@ class User {
   }
 
   Future<void> signIn(
-      {required String email,
-      required String password,
+      {
       Function(SignInResponse)? onSuccess,
       Function(int)? onError,
       Function()? onConnectionError}) async {
@@ -65,9 +67,7 @@ class User {
   }
 
   Future<void> signUp(
-      {required String email,
-      required String password,
-      required String name,
+      {
       Function(SignUpResponse)? onSuccess,
       Function(int)? onError,
       Function()? onConnectionError}) async {
@@ -91,7 +91,32 @@ class User {
     }
   }
 
-  logOut() {}
+  static logOut() {}
+
+  String? setEmail(String email) {
+    bool emailValid = RegExp(r"[a-zA-Z0-9_-]+@[a-z]+\.[a-z]").hasMatch(email);
+    if (email.isEmpty) {
+      return "this field is required";
+    } else if (!emailValid || email.contains(" ")) {
+      return "email not valid";
+    }
+  }
+
+  String? setPassword(String password) {
+    if (password.isEmpty) {
+      return "this field is required";
+    } else if (password.length < 6) {
+      return "password length must be 6 or more";
+    }
+  }
+
+  String? setName(String name) {
+    if (name.isEmpty) {
+      return "this field is required";
+    } else if (name.length < 1) {
+      return "name can't less than two letters";
+    }
+  }
 
   static int get id => _id;
   static String get jwt => _jwt;

@@ -1,11 +1,11 @@
 
 import 'package:do_it_flutter_v2/objects/user/ui/sign_up/sign_up_provider.dart';
-import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/email_field.dart';
-import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/logo.dart';
-import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/or_divider.dart';
-import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/password_field.dart';
-import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/sign_in_button.dart';
-import 'package:do_it_flutter_v2/objects/user/user_utils/widgets/sign_up_button.dart';
+import 'package:do_it_flutter_v2/objects/user/ui/widgets/email_field.dart';
+import 'package:do_it_flutter_v2/objects/user/ui/widgets/logo.dart';
+import 'package:do_it_flutter_v2/objects/user/ui/widgets/or_divider.dart';
+import 'package:do_it_flutter_v2/objects/user/ui/widgets/password_field.dart';
+import 'package:do_it_flutter_v2/objects/user/ui/widgets/sign_in_button.dart';
+import 'package:do_it_flutter_v2/objects/user/ui/widgets/sign_up_button.dart';
 import 'package:do_it_flutter_v2/utils/app_colors.dart';
 import 'package:do_it_flutter_v2/utils/app_height.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
@@ -49,19 +49,16 @@ class SignUpScreen extends StatelessWidget {
                       icon: Icons.person,
                       validator: (value) =>
                           provider.validateName(value ?? ""),
-                      onSaved: (value) => provider.name = value??"",
                     ),
                     AppHeight.h20,
                     EmailField(
                       validator: (value) =>
                           provider.validateEmail(value ?? ""),
-                      onSaved: (value) => provider.email = value ??"",
                     ),
                     AppHeight.h20,
                     PasswordField(
                       validator: (value) =>
                           provider.validatePassword(value ?? ""),
-                      onSaved: (value) => provider.password = value ??"",
                     ),
                     AppHeight.h50,
                     SignUpButton(onPressed: () {
