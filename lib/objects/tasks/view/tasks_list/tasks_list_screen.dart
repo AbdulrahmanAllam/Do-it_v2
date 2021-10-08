@@ -17,38 +17,35 @@ class TasksListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<TasksListProvider>(
-      create: (context) => TasksListProvider(),
-      child: Scaffold(
-        appBar: customAppBar(title: "Your Tasks"),
-        body: Consumer<TasksListProvider>(
-          builder: (context, provider, child) {
-            // TODO: make custom future builder
-            return FutureBuilder<int?>(
-              future: provider.getTasks(context: context),
-              builder: (context, AsyncSnapshot<int?> snapshot) {
-                if(snapshot.hasData && snapshot.data != null){
-                  return TasksListWidget();
-                }
-                else if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator(),);
-                }
-                else if(snapshot.hasError){
-                  Log.error("${snapshot.error}");
-                  return Center(child: Text("Error !"));
-                }
-                return GestureDetector(
-                    onTap: () => provider.refresh(),
-                    child: Center(child: Text("you don't have tasks"),));
-              },
-            );
-          },
-        ),
-        floatingActionButton: AddingFloatingActionButton(
-          onPressed: (){
-            Navigator.pushNamed(context, AddTaskScreen.route);
-          },
-        ),
+    return Scaffold(
+      appBar: customAppBar(title: "Your Tasks",leading: Icon(Icons.logout)),
+      body: Consumer<TasksListProvider>(
+        builder: (context, provider, child) {
+          // TODO: make custom future builder
+          return FutureBuilder<int?>(
+            future: provider.getTasks(context: context),
+            builder: (context, AsyncSnapshot<int?> snapshot) {
+              if(snapshot.hasData && snapshot.data != null){
+                return TasksListWidget();
+              }
+              else if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator(),);
+              }
+              else if(snapshot.hasError){
+                Log.error("${snapshot.error}");
+                return Center(child: Text("Error !"));
+              }
+              return GestureDetector(
+                  onTap: () => provider.refresh(),
+                  child: Center(child: Text("you don't have tasks"),));
+            },
+          );
+        },
+      ),
+      floatingActionButton: AddingFloatingActionButton(
+        onPressed: (){
+          Navigator.pushNamed(context, AddTaskScreen.route);
+        },
       ),
     );
   }
