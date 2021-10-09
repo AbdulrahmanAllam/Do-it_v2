@@ -1,6 +1,6 @@
 import 'package:do_it_flutter_v2/objects/task/task.dart';
 import 'package:do_it_flutter_v2/objects/task/ui/add_task/add_task_screen.dart';
-import 'package:do_it_flutter_v2/objects/tasks/view/tasks_list/tasks_list_provider.dart';
+import 'package:do_it_flutter_v2/objects/tasks/ui/tasks_list/tasks_list_provider.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:do_it_flutter_v2/utils/log.dart';
 import 'package:do_it_flutter_v2/widgets/adding_floating_action_button.dart';
@@ -11,10 +11,16 @@ import 'package:provider/provider.dart';
 
 import 'widgets/tasks_list_widget.dart';
 
-class TasksListScreen extends StatelessWidget {
+class TasksListScreen extends StatefulWidget {
+  static String get toText => "TasksListScreen";
   static String get route => AppRouter.addRoute(
-      routeName: "TasksListScreen", screen: TasksListScreen());
+      routeName: TasksListScreen.toText, screen: TasksListScreen());
 
+  @override
+  State<TasksListScreen> createState() => _TasksListScreenState();
+}
+
+class _TasksListScreenState extends State<TasksListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +54,11 @@ class TasksListScreen extends StatelessWidget {
         },
       ),
     );
+  }
+  @override
+  void dispose() {
+    AppRouter.removeRoute(routeName: TasksListScreen.toText);
+    super.dispose();
   }
 }
 

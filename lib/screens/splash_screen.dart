@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:do_it_flutter_v2/objects/tasks/view/tasks_list/tasks_list_screen.dart';
+import 'package:do_it_flutter_v2/objects/tasks/ui/tasks_list/tasks_list_screen.dart';
 import 'package:do_it_flutter_v2/objects/user/ui/sign_in/sign_in_screen.dart';
 import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:do_it_flutter_v2/utils/app_images.dart';
@@ -7,8 +7,9 @@ import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
+  static String get toText => "SplashScreen";
   static String get route =>
-      AppRouter.addRoute(routeName: "SplashScreen", screen: SplashScreen());
+      AppRouter.addRoute(routeName: SplashScreen.toText, screen: SplashScreen());
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -46,5 +47,10 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacementNamed(context, SignInScreen.route);
       }
     );
+  }
+  @override
+  void dispose() {
+    AppRouter.removeRoute(routeName: SplashScreen.toText);
+    super.dispose();
   }
 }

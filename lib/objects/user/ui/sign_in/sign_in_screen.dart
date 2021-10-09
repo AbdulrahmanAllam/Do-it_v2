@@ -15,10 +15,16 @@ import 'package:provider/provider.dart';
 
 import 'sign_in_provider.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
+  static String get toText => "SignInScreen";
   static String get route =>
-      AppRouter.addRoute(routeName: "SignInScreen", screen: SignInScreen());
+      AppRouter.addRoute(routeName: toText, screen: SignInScreen());
 
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SignInProvider>(
@@ -62,5 +68,10 @@ class SignInScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    AppRouter.removeRoute(routeName: SignInScreen.toText);
+    super.dispose();
   }
 }

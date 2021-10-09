@@ -14,10 +14,16 @@ import 'package:do_it_flutter_v2/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+  static String get toText => "SignUpScreen";
   static String get route =>
-      AppRouter.addRoute(routeName: "SignUpScreen", screen: SignUpScreen());
+      AppRouter.addRoute(routeName: SignUpScreen.toText, screen: SignUpScreen());
 
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SignUpProvider>(
@@ -76,5 +82,10 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    AppRouter.removeRoute(routeName: SignUpScreen.toText);
+    super.dispose();
   }
 }

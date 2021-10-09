@@ -1,4 +1,4 @@
-import 'package:do_it_flutter_v2/objects/tasks/view/tasks_list/tasks_list_provider.dart';
+import 'package:do_it_flutter_v2/objects/tasks/ui/tasks_list/tasks_list_provider.dart';
 import 'package:do_it_flutter_v2/widgets/custom_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

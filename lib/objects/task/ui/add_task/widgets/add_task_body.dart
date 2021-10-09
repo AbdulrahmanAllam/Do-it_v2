@@ -1,4 +1,4 @@
-import 'package:do_it_flutter_v2/objects/tasks/view/tasks_list/tasks_list_provider.dart';
+import 'package:do_it_flutter_v2/objects/tasks/ui/tasks_list/tasks_list_provider.dart';
 import 'package:do_it_flutter_v2/utils/app_height.dart';
 import 'package:do_it_flutter_v2/widgets/custom_text_form_field.dart';
 import 'package:do_it_flutter_v2/widgets/cutom_material_button.dart';

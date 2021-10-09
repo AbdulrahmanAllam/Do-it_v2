@@ -1,6 +1,6 @@
 import 'package:do_it_flutter_v2/objects/task/ui/add_task/add_task_proivder.dart';
 import 'package:do_it_flutter_v2/objects/task/ui/add_task/widgets/add_task_body.dart';
-import 'package:do_it_flutter_v2/objects/tasks/view/tasks_list/tasks_list_provider.dart';
+import 'package:do_it_flutter_v2/objects/tasks/ui/tasks_list/tasks_list_provider.dart';
 import 'package:do_it_flutter_v2/utils/app_height.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:do_it_flutter_v2/widgets/custom_app_bar.dart';
@@ -10,10 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget {
+  static String get toText => "AddTaskScreen";
   static String route =
       AppRouter.addRoute(routeName: "AddTaskScreen", screen: AddTaskScreen());
 
+  @override
+  State<AddTaskScreen> createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AddTaskProvider>(
@@ -33,5 +39,10 @@ class AddTaskScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    AppRouter.removeRoute(routeName: AddTaskScreen.toText);
+    super.dispose();
   }
 }

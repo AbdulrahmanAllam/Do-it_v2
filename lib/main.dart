@@ -3,7 +3,7 @@ import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'objects/tasks/view/tasks_list/tasks_list_provider.dart';
+import 'objects/tasks/ui/tasks_list/tasks_list_provider.dart';
 import 'utils/app_colors.dart';
 
 void main() {
