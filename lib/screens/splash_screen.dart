@@ -4,6 +4,7 @@ import 'package:do_it_flutter_v2/objects/user/ui/sign_in/sign_in_screen.dart';
 import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:do_it_flutter_v2/utils/app_images.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
+import 'package:do_it_flutter_v2/widgets/custom_state.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends CustomState<SplashScreen> {
 
   @override
   void initState() {
@@ -48,9 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     );
   }
+
   @override
-  void dispose() {
-    AppRouter.removeRoute(routeName: SplashScreen.toText);
-    super.dispose();
-  }
+  String get routeName => widget.toString();
 }

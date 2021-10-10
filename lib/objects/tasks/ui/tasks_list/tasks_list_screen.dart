@@ -6,6 +6,7 @@ import 'package:do_it_flutter_v2/utils/log.dart';
 import 'package:do_it_flutter_v2/widgets/adding_floating_action_button.dart';
 import 'package:do_it_flutter_v2/widgets/custom_app_bar.dart';
 import 'package:do_it_flutter_v2/widgets/custom_item_widget.dart';
+import 'package:do_it_flutter_v2/widgets/custom_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,7 @@ class TasksListScreen extends StatefulWidget {
   State<TasksListScreen> createState() => _TasksListScreenState();
 }
 
-class _TasksListScreenState extends State<TasksListScreen> {
+class _TasksListScreenState extends CustomState<TasksListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,11 +56,9 @@ class _TasksListScreenState extends State<TasksListScreen> {
       ),
     );
   }
+
   @override
-  void dispose() {
-    AppRouter.removeRoute(routeName: TasksListScreen.toText);
-    super.dispose();
-  }
+  String get routeName => widget.toString();
 }
 
 

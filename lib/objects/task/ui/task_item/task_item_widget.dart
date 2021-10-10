@@ -10,18 +10,12 @@ import 'widgets/checked_task.dart';
 import 'widgets/unchecked_task.dart';
 
 class TaskItemWidget extends StatelessWidget {
-
-  // late Task _task;
-
-  // TaskItemWidget({required Task task}):_task = task;
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TaskItemProvider>(context, listen: false);
     if(provider.done){
-      // return CheckedTask(task: _task,);
       return CheckedTask();
     }else{
-      // return UncheckedTask(task: _task);
       return UncheckedTask();
     }
   }

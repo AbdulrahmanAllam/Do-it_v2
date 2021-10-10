@@ -10,6 +10,7 @@ import 'package:do_it_flutter_v2/utils/app_colors.dart';
 import 'package:do_it_flutter_v2/utils/app_height.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:do_it_flutter_v2/widgets/custom_app_bar.dart';
+import 'package:do_it_flutter_v2/widgets/custom_state.dart';
 import 'package:do_it_flutter_v2/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,7 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends CustomState<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SignUpProvider>(
@@ -83,9 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+
   @override
-  void dispose() {
-    AppRouter.removeRoute(routeName: SignUpScreen.toText);
-    super.dispose();
-  }
+  String get routeName => widget.toString();
 }

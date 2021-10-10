@@ -10,6 +10,7 @@ import 'package:do_it_flutter_v2/utils/app_height.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:do_it_flutter_v2/widgets/custom_app_bar.dart';
 import 'package:do_it_flutter_v2/widgets/custom_snack_bar.dart';
+import 'package:do_it_flutter_v2/widgets/custom_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,7 @@ class SignInScreen extends StatefulWidget {
   State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignInScreenState extends CustomState<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SignInProvider>(
@@ -69,9 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
     );
   }
+
   @override
-  void dispose() {
-    AppRouter.removeRoute(routeName: SignInScreen.toText);
-    super.dispose();
-  }
+  String get routeName => widget.toString();
 }

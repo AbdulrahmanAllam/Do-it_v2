@@ -4,6 +4,7 @@ import 'package:do_it_flutter_v2/objects/tasks/ui/tasks_list/tasks_list_provider
 import 'package:do_it_flutter_v2/utils/app_height.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:do_it_flutter_v2/widgets/custom_app_bar.dart';
+import 'package:do_it_flutter_v2/widgets/custom_state.dart';
 import 'package:do_it_flutter_v2/widgets/custom_text_form_field.dart';
 import 'package:do_it_flutter_v2/widgets/cutom_material_button.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class AddTaskScreen extends StatefulWidget {
   State<AddTaskScreen> createState() => _AddTaskScreenState();
 }
 
-class _AddTaskScreenState extends State<AddTaskScreen> {
+class _AddTaskScreenState extends CustomState<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AddTaskProvider>(
@@ -40,9 +41,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       ),
     );
   }
+
   @override
-  void dispose() {
-    AppRouter.removeRoute(routeName: AddTaskScreen.toText);
-    super.dispose();
-  }
+  String get routeName => widget.toString();
 }
