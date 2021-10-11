@@ -6,6 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   void Function(String?)? onSaved;
   IconData? icon;
   String? hintText;
+  String? initialValue;
   int? maxLength;
   int? maxLines;
 
@@ -14,6 +15,7 @@ class CustomTextFormField extends StatelessWidget {
       this.onSaved,
       this.icon,
       this.hintText,
+      this.initialValue,
       this.maxLength,
       this.maxLines});
 
@@ -21,6 +23,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     if (icon != null) {
       return TextFormField(
+        initialValue: initialValue,
         cursorColor: AppColors.black,
         validator: validator,
         onSaved: onSaved,
@@ -41,6 +44,7 @@ class CustomTextFormField extends StatelessWidget {
       );
     } else {
       return TextFormField(
+        initialValue: initialValue,
         cursorColor: AppColors.black,
         validator: validator,
         onSaved: onSaved,

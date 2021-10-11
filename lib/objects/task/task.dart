@@ -34,7 +34,22 @@ class Task {
     }
   }
 
-  update() {}
+  Future<void> update({Function(UpdateTaskResponse)? onSuccess, Function(int)? onError, Function()? onConnectionError}) async {
+    Map<String, String> body = {
+      "title": this._title,
+      "description": this._description,
+      "category": this._category?.id.toString()??"0",
+    };
+    await _httpServices.put<UpdateTaskResponse>(
+      endpoint: "tasks/${this._id}",
+      requestName: "Update Task",
+      responseModel: UpdateTaskResponse(),
+      body: body,
+      onSuccess: onSuccess,
+      onError: onError,
+      onConnectionError: onConnectionError,
+    );
+  }
 
   Future<void> add({Function(AddTaskResponse)? onSuccess, Function(int)? onError, Function()? onConnectionError}) async {
     Map<String, String> body = {

@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class DescriptionTextFormFiled extends StatelessWidget {
 
   String Function(String?)? validator;
+  String? initialValue;
 
-  DescriptionTextFormFiled({this.validator});
+  DescriptionTextFormFiled({this.validator, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      initialValue: initialValue,
       hintText: "Description",
       maxLines: 5,
       validator: validator,
