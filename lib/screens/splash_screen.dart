@@ -8,9 +8,8 @@ import 'package:do_it_flutter_v2/widgets/custom_state.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
-  static String get toText => "SplashScreen";
   static String get route =>
-      AppRouter.addRoute(routeName: SplashScreen.toText, screen: SplashScreen());
+      AppRouter.addRoute(screen: SplashScreen());
 
   @override
   _SplashScreenState createState() => _SplashScreenState();

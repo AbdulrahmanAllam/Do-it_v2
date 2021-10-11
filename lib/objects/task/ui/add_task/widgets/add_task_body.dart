@@ -1,3 +1,5 @@
+import 'package:do_it_flutter_v2/objects/task/ui/widgets/description_text_form_field.dart';
+import 'package:do_it_flutter_v2/objects/task/ui/widgets/title_text_form_field.dart';
 import 'package:do_it_flutter_v2/objects/tasks/ui/tasks_list/tasks_list_provider.dart';
 import 'package:do_it_flutter_v2/utils/app_height.dart';
 import 'package:do_it_flutter_v2/widgets/custom_text_form_field.dart';
@@ -17,18 +19,12 @@ class AddTaskBody extends StatelessWidget {
       key: provider.formKey,
       child: Column(
         children: [
-          CustomTextFormField(
-            hintText: "Title",
-            maxLength: 20,
-            maxLines: 1,
-            validator: (value) => provider.validateTitle(title: value ?? ""),
+          TitleTextFormField(
+            validator: (v) => provider.validateTitle(title: v??""),
           ),
           AppHeight.h30,
-          CustomTextFormField(
-            hintText: "Description",
-            maxLines: 5,
-            validator: (v) =>
-                provider.validateDescription(description: v ?? ""),
+          DescriptionTextFormFiled(
+            validator: (v) => provider.validateDescription(),
           ),
           AppHeight.h30,
           //TODO: select category from drop down

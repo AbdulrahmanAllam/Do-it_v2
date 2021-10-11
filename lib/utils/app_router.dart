@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 abstract class AppRouter {
 
-  static String addRoute({required String routeName, required Widget screen}){
-    routes[routeName] = (context) => screen;
+  static String addRoute({required Widget screen}){
+    routes[screen.toString()] = (context) => screen;
     Log.information(routes);
-    return routeName;
+    return screen.toString();
   }
 
   static void removeRoute({required String routeName}){

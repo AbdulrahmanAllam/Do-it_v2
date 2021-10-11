@@ -16,9 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
-  static String get toText => "SignUpScreen";
   static String get route =>
-      AppRouter.addRoute(routeName: SignUpScreen.toText, screen: SignUpScreen());
+      AppRouter.addRoute(screen: SignUpScreen());
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();

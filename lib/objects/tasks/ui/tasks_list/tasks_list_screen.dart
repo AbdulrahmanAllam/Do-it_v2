@@ -13,9 +13,7 @@ import 'package:provider/provider.dart';
 import 'widgets/tasks_list_widget.dart';
 
 class TasksListScreen extends StatefulWidget {
-  static String get toText => "TasksListScreen";
-  static String get route => AppRouter.addRoute(
-      routeName: TasksListScreen.toText, screen: TasksListScreen());
+  static String get route => AppRouter.addRoute(screen: TasksListScreen());
 
   @override
   State<TasksListScreen> createState() => _TasksListScreenState();

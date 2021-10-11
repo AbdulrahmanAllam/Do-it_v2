@@ -26,6 +26,14 @@ class Task {
         _description = description,
         _category = category;
 
+  bool equal(Task other){
+    if(this._title == other.title && this._done == other.done && this._description == other.description && this._category?.id == other.category?.id){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   update() {}
 
   Future<void> add({Function(AddTaskResponse)? onSuccess, Function(int)? onError, Function()? onConnectionError}) async {

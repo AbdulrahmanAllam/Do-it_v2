@@ -14,6 +14,15 @@ class Category {
         _name = name,
         _tasks = tasks;
 
+  bool equal(Category? other){
+    if(this._name == other?.name && this.color == other?.color){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   int get color => _color;
   set color(int v) => _color = v;
 

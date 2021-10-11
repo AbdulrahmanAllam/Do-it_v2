@@ -17,9 +17,8 @@ import 'package:provider/provider.dart';
 import 'sign_in_provider.dart';
 
 class SignInScreen extends StatefulWidget {
-  static String get toText => "SignInScreen";
   static String get route =>
-      AppRouter.addRoute(routeName: toText, screen: SignInScreen());
+      AppRouter.addRoute(screen: SignInScreen());
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();

@@ -12,9 +12,8 @@ import 'package:provider/provider.dart';
 
 
 class AddTaskScreen extends StatefulWidget {
-  static String get toText => "AddTaskScreen";
   static String route =
-      AppRouter.addRoute(routeName: "AddTaskScreen", screen: AddTaskScreen());
+      AppRouter.addRoute(screen: AddTaskScreen());
 
   @override
   State<AddTaskScreen> createState() => _AddTaskScreenState();
