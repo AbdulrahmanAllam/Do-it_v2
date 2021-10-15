@@ -5,12 +5,13 @@ abstract class AppRouter {
 
   static String addRoute({required Widget screen}){
     routes[screen.toString()] = (context) => screen;
-    Log.information(routes);
+    Log.debug("Add route : $routes");
     return screen.toString();
   }
 
   static void removeRoute({required String routeName}){
     routes.remove(routeName);
+    Log.debug("remove route : $routes");
   }
 
   static Map<String, WidgetBuilder> routes = {};  

@@ -10,8 +10,8 @@ class AddTaskProvider extends ChangeNotifier{
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Task _task = Task(title: "fake",done: true,id: 0, description: "",category: Category(id: 1,color: 1,name: ""));
 
-  validateTitle({required String title}) => _task.setTitle(title);
-  validateDescription({String? description}) => _task.setDescription(description??"");
+  String? validateTitle({required String title}) => _task.setTitle(title);
+  String? validateDescription({required String description}) => _task.setDescription(description);
 
   Future<void> add({Function(AddTaskResponse)? onSuccess}) async {
     if(_formKey.currentState!.validate()) {
@@ -21,4 +21,12 @@ class AddTaskProvider extends ChangeNotifier{
   }
 
   GlobalKey<FormState> get formKey => _formKey;
+
+  set task(Task? v) {
+    if(v == null){
+      _task = Task(id: 0, done: false,title: "fake",description: "");
+    }else{
+      _task = v;
+    }
+  }
 }

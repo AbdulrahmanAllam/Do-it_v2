@@ -4,6 +4,7 @@ import 'package:do_it_flutter_v2/objects/task/response/delete_task_response.dart
 import 'package:do_it_flutter_v2/objects/task/response/update_task_response.dart';
 import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:do_it_flutter_v2/services/remote/api/http_services.dart';
+import 'package:do_it_flutter_v2/utils/log.dart';
 
 class Task {
   HttpServices _httpServices = HttpServices.singleton;
@@ -26,8 +27,22 @@ class Task {
         _description = description,
         _category = category;
 
+  void getInfo(){
+    Log.information("title: ${this._title}, done: ${this._done}, description: ${this._description}, category_id: ${this._category?.id}");
+  }
+
+  void setAll(Task task){
+    this.id = task.id;
+    this.setTitle(task.title);
+    this.done = task.done;
+    this.setDescription(task.description);
+    this.category = task.category;
+  }
+
   bool equal(Task other){
     if(this._title == other.title && this._done == other.done && this._description == other.description && this._category?.id == other.category?.id){
+      getInfo();
+      other.getInfo();
       return true;
     }else{
       return false;

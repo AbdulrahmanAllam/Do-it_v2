@@ -25,7 +25,7 @@ class Tasks {
         data.tasks?.forEach((element) {
           if (int.parse(element.userId ?? "0") == User.id) {
             _tasks?.add(Task(
-              description: "",
+              description: element.description??"",
               id: element.id ?? 0,
               title: element.title ?? "",
               done: element.done ?? false,

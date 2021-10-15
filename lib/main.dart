@@ -1,5 +1,6 @@
 import 'package:do_it_flutter_v2/screens/splash_screen.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
+import 'package:do_it_flutter_v2/utils/log.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   static final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   @override
   Widget build(BuildContext context) {
-
+    Log.information(Colors.amber.value);
     return ChangeNotifierProvider<TasksListProvider>(
       create: (_) => TasksListProvider(),
       child: MaterialApp(

@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 
 class TitleTextFormField extends StatelessWidget {
 
-  String Function(String?)? validator;
+  String? Function(String?)? validator;
   String? initialValue;
+  Function(String?)? onSaved;
 
-  TitleTextFormField({this.validator, this.initialValue});
+  TitleTextFormField({this.validator, this.initialValue, this.onSaved});
 
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      onSaved: onSaved,
       initialValue: initialValue,
       hintText: "Title",
       maxLength: 20,

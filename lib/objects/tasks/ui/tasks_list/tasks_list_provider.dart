@@ -5,6 +5,7 @@ import '../../tasks.dart';
 
 class TasksListProvider extends ChangeNotifier {
   Tasks _tasksObject = Tasks();
+  Task _selectedTask = Task(id: 0, title: "fake", done: false, description: "description");
   List<Task>? _tasks;
 
   Future<int?> getTasks({required BuildContext context}) async {
@@ -23,4 +24,11 @@ class TasksListProvider extends ChangeNotifier {
   void refresh() => notifyListeners();
 
   List<Task>? get tasks => _tasks;
+
+  Task get selectedTask => _selectedTask;
+
+  set selectedTask(Task value) {
+    _selectedTask = value;
+  }
+
 }

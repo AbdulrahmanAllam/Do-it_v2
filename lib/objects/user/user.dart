@@ -4,11 +4,12 @@ import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_prefer
 import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_preferences_services.dart';
 import 'package:do_it_flutter_v2/services/remote/api/http_services.dart';
 import 'package:do_it_flutter_v2/utils/log.dart';
+import 'package:flutter/material.dart';
+
+import '../../main.dart';
 
 class User {
   final HttpServices _httpServices = HttpServices.singleton;
-  static final SharedPreferencesServices _sharedPreferencesServices =
-      SharedPreferencesServices.singleton;
 
   static int _id = 0;
   static String _jwt = "";
@@ -20,17 +21,17 @@ class User {
   static void save({required int id, required String jwt}) async {
     _id = id;
     _jwt = jwt;
-    await _sharedPreferencesServices.setInt(
+    await SharedPreferencesServices.singleton.setInt(
         key: SharedPreferencesKeys.userId, value: id);
-    await _sharedPreferencesServices.setString(
+    await SharedPreferencesServices.singleton.setString(
         key: SharedPreferencesKeys.jwt, value: jwt);
   }
 
   // check if user is sorted
   static void check({Function()? found, Function()? notFound}) async {
-    int? id = await _sharedPreferencesServices.getInt(
+    int? id = await SharedPreferencesServices.singleton.getInt(
         key: SharedPreferencesKeys.userId);
-    String? jwt = await _sharedPreferencesServices.getString(
+    String? jwt = await SharedPreferencesServices.singleton.getString(
         key: SharedPreferencesKeys.jwt);
 
     if (id == null && jwt == null) {
@@ -91,7 +92,9 @@ class User {
     }
   }
 
-  static void logOut() {}
+  static void logOut() {
+    // SharedPreferencesServices.singleton.clear().then((value) => Navigator.pushReplacementNamed(MyApp.rootScaffoldMessengerKey.currentState.context, "`routeName`"));
+  }
 
   String? setEmail(String email) {
     bool emailValid = RegExp(r"[a-zA-Z0-9_-]+@[a-z]+\.[a-z]").hasMatch(email);

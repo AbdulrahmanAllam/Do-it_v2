@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class DescriptionTextFormFiled extends StatelessWidget {
 
-  String Function(String?)? validator;
+  String? Function(String?)? validator;
   String? initialValue;
 
   DescriptionTextFormFiled({this.validator, this.initialValue});
