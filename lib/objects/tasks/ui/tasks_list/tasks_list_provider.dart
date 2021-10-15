@@ -1,4 +1,5 @@
 import 'package:do_it_flutter_v2/objects/task/task.dart';
+import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:flutter/material.dart';
 
 import '../../tasks.dart';
@@ -19,6 +20,10 @@ class TasksListProvider extends ChangeNotifier {
       },
     );
     return status;
+  }
+
+  void logout(){
+    User.logOut();
   }
 
   void refresh() => notifyListeners();

@@ -14,12 +14,15 @@ void main() {
 
 class MyApp extends StatelessWidget {
   static final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+  static final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     Log.information(Colors.amber.value);
     return ChangeNotifierProvider<TasksListProvider>(
       create: (_) => TasksListProvider(),
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         scaffoldMessengerKey: rootScaffoldMessengerKey,
         theme: ThemeData(
             appBarTheme: AppBarTheme(

@@ -1,5 +1,6 @@
 import 'package:do_it_flutter_v2/objects/user/responses/sign_in_response.dart';
 import 'package:do_it_flutter_v2/objects/user/responses/sign_up_response.dart';
+import 'package:do_it_flutter_v2/objects/user/ui/sign_in/sign_in_screen.dart';
 import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_preferences_keys.dart';
 import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_preferences_services.dart';
 import 'package:do_it_flutter_v2/services/remote/api/http_services.dart';
@@ -93,7 +94,7 @@ class User {
   }
 
   static void logOut() {
-    // SharedPreferencesServices.singleton.clear().then((value) => Navigator.pushReplacementNamed(MyApp.rootScaffoldMessengerKey.currentState.context, "`routeName`"));
+    SharedPreferencesServices.singleton.clear().then((value) => Navigator.pushReplacementNamed(MyApp.navigatorKey.currentState!.context, SignInScreen.route));
   }
 
   String? setEmail(String email) {

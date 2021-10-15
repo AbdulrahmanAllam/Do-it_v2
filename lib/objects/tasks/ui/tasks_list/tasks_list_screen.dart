@@ -22,8 +22,9 @@ class TasksListScreen extends StatefulWidget {
 class _TasksListScreenState extends CustomState<TasksListScreen> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<TasksListProvider>(context, listen: false);
     return Scaffold(
-      appBar: customAppBar(title: "Your Tasks",leading: Icon(Icons.logout)),
+      appBar: customAppBar(title: "Your Tasks",leading: IconButton(onPressed: (){provider.logout();}, icon: Icon(Icons.logout))),
       body: Consumer<TasksListProvider>(
         builder: (context, provider, child) {
           // TODO: make custom future builder
