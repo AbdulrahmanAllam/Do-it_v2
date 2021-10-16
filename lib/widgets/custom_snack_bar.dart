@@ -9,3 +9,10 @@ void customSnackBar({String? text}) {
     ),
   );
 }
+
+//TODO: make it as class
+
+// abstract class CustomSnackBar{
+//   static void show(){}
+//   static Widget _snackBar(){}
+// }

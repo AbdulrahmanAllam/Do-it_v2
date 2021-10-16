@@ -16,6 +16,9 @@ class MyApp extends StatelessWidget {
   static final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   static final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
+  //TODO: search about ( GlobalKey - ScaffoldMessengerState - NavigatorState )
+  //TODO: make custom navigator and try remove [ChangeNotifierProvider<TasksListProvider>]
+
   @override
   Widget build(BuildContext context) {
     Log.information(Colors.amber.value);
