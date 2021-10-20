@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class AppHeight {
+abstract class AppHeight {
   static Widget get expanded {
     return Expanded(
         child: SizedBox(

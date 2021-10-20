@@ -13,8 +13,8 @@ void main() {
 
 
 class MyApp extends StatelessWidget {
-  static final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-  static final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+  static final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   //TODO: search about ( GlobalKey - ScaffoldMessengerState - NavigatorState )
   //TODO: make custom navigator and try remove [ChangeNotifierProvider<TasksListProvider>]
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       create: (_) => TasksListProvider(),
       child: MaterialApp(
         navigatorKey: navigatorKey,
-        scaffoldMessengerKey: rootScaffoldMessengerKey,
+        scaffoldMessengerKey: scaffoldMessengerKey,
         theme: ThemeData(
             appBarTheme: AppBarTheme(
               iconTheme: IconThemeData(color: AppColors.black),

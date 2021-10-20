@@ -2,7 +2,7 @@
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 
-class Log {
+abstract class Log {
   static Logger _logger = Logger();
 
   static debug(String message) {
