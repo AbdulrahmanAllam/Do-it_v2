@@ -5,6 +5,7 @@ import 'package:do_it_flutter_v2/objects/task/ui/task_item/task_item_widget.dart
 import 'package:do_it_flutter_v2/objects/task/ui/update_task/update_task_provider.dart';
 import 'package:do_it_flutter_v2/objects/task/ui/update_task/update_task_screen.dart';
 import 'package:do_it_flutter_v2/objects/tasks/ui/tasks_list/tasks_list_provider.dart';
+import 'package:do_it_flutter_v2/utils/app_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,7 @@ class TasksListWidget extends StatelessWidget {
           child: GestureDetector(
             onTap: (){
               provider.selectedTask = provider.tasks?[index]??Task(id: 0,description: "",title: "", done: true);
-              Navigator.pushNamed(context, UpdateTaskScreen.route);
+              AppNavigator.push(routeName: UpdateTaskScreen.route);
             },
             child: TaskItemWidget(),
           ),

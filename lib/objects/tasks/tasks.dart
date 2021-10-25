@@ -1,4 +1,3 @@
-import 'package:do_it_flutter_v2/objects/category/category.dart';
 import 'package:do_it_flutter_v2/objects/task/response/add_task_response.dart';
 import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:do_it_flutter_v2/services/remote/api/http_services.dart';
@@ -29,10 +28,6 @@ class Tasks {
               id: element.id ?? 0,
               title: element.title ?? "",
               done: element.done ?? false,
-              category: Category(
-                  name: element.category?.name ?? "fake",
-                  id: element.category?.id ?? 0,
-                  color: int.parse(element.category?.color ?? "0")),
             ));
           }
         });

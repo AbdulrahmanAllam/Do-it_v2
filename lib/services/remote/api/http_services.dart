@@ -40,8 +40,7 @@ class HttpServices {
       if (onConnectionError != null) {
         onConnectionError();
       } else {
-        // toast("check your internet connection");
-        customSnackBar(text: "fhdal");
+        CustomSnackBar.show(message: "check your internet connection");
       }
     }
   }

@@ -1,4 +1,5 @@
 import 'package:do_it_flutter_v2/objects/tasks/ui/tasks_list/tasks_list_screen.dart';
+import 'package:do_it_flutter_v2/utils/app_navigator.dart';
 import 'package:flutter/material.dart';
 
 import '../../user.dart';
@@ -19,8 +20,7 @@ class SignUpProvider extends ChangeNotifier {
     if (_formKey.currentState!.validate()) {
       await _user.signUp(
         onSuccess: (data) async {
-          User.save(id: data.user?.id??0, jwt: data.jwt??"");
-          Navigator.pushReplacementNamed(context, TasksListScreen.route);
+          AppNavigator.pushAndRemoveUntil(routeName: TasksListScreen.route, predicate: (route)=>false);
         },
       );
     }

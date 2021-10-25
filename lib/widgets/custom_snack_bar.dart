@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../main.dart';
 
-void customSnackBar({String? text}) {
-  MyApp.scaffoldMessengerKey.currentState?.showSnackBar(
-    SnackBar(
-      content: Text("$text"),
-    ),
-  );
+abstract class CustomSnackBar{
+
+  static void show({required String message}){
+    MyApp.scaffoldMessengerKey.currentState?.showSnackBar(_snackBar(message: message));
+  }
+
+  static SnackBar _snackBar({required String message}){
+    return SnackBar(
+      content: Text("$message"),
+    );
+  }
 }
-
-//TODO: make it as class
-
-// abstract class CustomSnackBar{
-//   static void show(){}
-//   static Widget _snackBar(){}
-// }

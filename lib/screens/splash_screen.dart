@@ -3,6 +3,7 @@ import 'package:do_it_flutter_v2/objects/tasks/ui/tasks_list/tasks_list_screen.d
 import 'package:do_it_flutter_v2/objects/user/ui/sign_in/sign_in_screen.dart';
 import 'package:do_it_flutter_v2/objects/user/user.dart';
 import 'package:do_it_flutter_v2/utils/app_images.dart';
+import 'package:do_it_flutter_v2/utils/app_navigator.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:do_it_flutter_v2/widgets/custom_state.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +42,10 @@ class _SplashScreenState extends CustomState<SplashScreen> {
   _goTo() async {
     User.check(
       found: (){
-        Navigator.pushReplacementNamed(context, TasksListScreen.route);
+        AppNavigator.pushReplacement(routeName: TasksListScreen.route);
       },
       notFound: (){
-        Navigator.pushReplacementNamed(context, SignInScreen.route);
+        AppNavigator.pushReplacement(routeName: SignInScreen.route);
       }
     );
   }

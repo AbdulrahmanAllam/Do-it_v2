@@ -7,6 +7,7 @@ import 'package:do_it_flutter_v2/objects/user/ui/widgets/password_field.dart';
 import 'package:do_it_flutter_v2/objects/user/ui/widgets/sign_in_button.dart';
 import 'package:do_it_flutter_v2/objects/user/ui/widgets/sign_up_button.dart';
 import 'package:do_it_flutter_v2/utils/app_height.dart';
+import 'package:do_it_flutter_v2/utils/app_navigator.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:do_it_flutter_v2/widgets/custom_app_bar.dart';
 import 'package:do_it_flutter_v2/widgets/custom_snack_bar.dart';
@@ -58,7 +59,7 @@ class _SignInScreenState extends CustomState<SignInScreen> {
                     }),
                     OrDivider(),
                     SignUpButton(onPressed: () {
-                      Navigator.pushNamed(context, SignUpScreen.route);
+                      AppNavigator.push(routeName: SignUpScreen.route);
                     }),
                   ],
                 ),

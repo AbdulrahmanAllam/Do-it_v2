@@ -15,8 +15,8 @@ class UncheckedTask extends StatelessWidget {
     final tasksProvider = Provider.of<TasksListProvider>(context, listen: false);
     return CustomItemWidget(
         text: "${taskProvider.title}",
-        circleColor: Color(taskProvider.color),
-        tapOnCircle: () {
+        check: taskProvider.done,
+        onChange: () {
           taskProvider.check().then((value) => tasksProvider.refresh());
         },
         deleteItem: () async {

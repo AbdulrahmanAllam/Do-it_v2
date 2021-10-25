@@ -1,4 +1,4 @@
 abstract class SharedPreferencesKeys{
-  static const String userId = "userId";
-  static const String jwt = "jwt";
+  static String get userId => "userId";
+  static String get jwt => "jwt";
 }

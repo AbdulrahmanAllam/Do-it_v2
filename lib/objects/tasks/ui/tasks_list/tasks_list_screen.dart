@@ -1,6 +1,7 @@
 import 'package:do_it_flutter_v2/objects/task/task.dart';
 import 'package:do_it_flutter_v2/objects/task/ui/add_task/add_task_screen.dart';
 import 'package:do_it_flutter_v2/objects/tasks/ui/tasks_list/tasks_list_provider.dart';
+import 'package:do_it_flutter_v2/utils/app_navigator.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:do_it_flutter_v2/utils/log.dart';
 import 'package:do_it_flutter_v2/widgets/adding_floating_action_button.dart';
@@ -24,7 +25,7 @@ class _TasksListScreenState extends CustomState<TasksListScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<TasksListProvider>(context, listen: false);
     return Scaffold(
-      appBar: customAppBar(title: "Your Tasks",leading: IconButton(onPressed: (){provider.logout();}, icon: Icon(Icons.logout))),
+      appBar:customAppBar(title: "Your Tasks", actions: [IconButton(onPressed: (){provider.logout();}, icon: Icon(Icons.logout),)]),
       body: Consumer<TasksListProvider>(
         builder: (context, provider, child) {
           // TODO: make custom future builder
@@ -50,7 +51,7 @@ class _TasksListScreenState extends CustomState<TasksListScreen> {
       ),
       floatingActionButton: AddingFloatingActionButton(
         onPressed: (){
-          Navigator.pushNamed(context, AddTaskScreen.route);
+          AppNavigator.push(routeName: AddTaskScreen.route);
         },
       ),
     );

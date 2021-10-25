@@ -1,4 +1,3 @@
-import 'package:do_it_flutter_v2/objects/category/category.dart';
 import 'package:do_it_flutter_v2/objects/task/response/add_task_response.dart';
 import 'package:do_it_flutter_v2/objects/task/ui/task_item/widgets/checked_task.dart';
 import 'package:do_it_flutter_v2/objects/tasks/tasks.dart';
@@ -8,7 +7,7 @@ import '../../task.dart';
 
 class AddTaskProvider extends ChangeNotifier{
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  Task _task = Task(title: "fake",done: true,id: 0, description: "",category: Category(id: 1,color: 1,name: ""));
+  Task _task = Task(title: "fake",done: true,id: 0, description: "");
 
   String? validateTitle({required String title}) => _task.setTitle(title);
   String? validateDescription({required String description}) => _task.setDescription(description);

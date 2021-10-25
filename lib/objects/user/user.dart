@@ -4,10 +4,8 @@ import 'package:do_it_flutter_v2/objects/user/ui/sign_in/sign_in_screen.dart';
 import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_preferences_keys.dart';
 import 'package:do_it_flutter_v2/services/local/shared_preferences/shared_preferences_services.dart';
 import 'package:do_it_flutter_v2/services/remote/api/http_services.dart';
+import 'package:do_it_flutter_v2/utils/app_navigator.dart';
 import 'package:do_it_flutter_v2/utils/log.dart';
-import 'package:flutter/material.dart';
-
-import '../../main.dart';
 
 class User {
   final HttpServices _httpServices = HttpServices.singleton;
@@ -19,14 +17,7 @@ class User {
   late String _password;
 
 
-  static void save({required int id, required String jwt}) async {
-    _id = id;
-    _jwt = jwt;
-    await SharedPreferencesServices.singleton.setInt(
-        key: SharedPreferencesKeys.userId, value: id);
-    await SharedPreferencesServices.singleton.setString(
-        key: SharedPreferencesKeys.jwt, value: jwt);
-  }
+
 
   // check if user is sorted
   static void check({Function()? found, Function()? notFound}) async {
@@ -61,7 +52,10 @@ class User {
         requestName: "Sign In",
         responseModel: SignInResponse(),
         body: body,
-        onSuccess: onSuccess,
+        onSuccess: (data){
+          _setIdAndGwt(id: data.user?.id??0, jwt: data.jwt??"");
+          if(onSuccess != null) onSuccess(data);
+        },
         onError: onError,
         onConnectionError: onConnectionError,
       );
@@ -86,7 +80,10 @@ class User {
         requestName: "Sign Up",
         responseModel: SignUpResponse(),
         body: body,
-        onSuccess: onSuccess,
+        onSuccess: (data){
+          _setIdAndGwt(id: data.user?.id??0, jwt: data.jwt??"");
+          if(onSuccess != null) onSuccess(data);
+        },
         onError: onError,
         onConnectionError: onConnectionError,
       );
@@ -94,7 +91,7 @@ class User {
   }
 
   static void logOut() {
-    SharedPreferencesServices.singleton.clear().then((value) => Navigator.pushReplacementNamed(MyApp.navigatorKey.currentState!.context, SignInScreen.route));
+    SharedPreferencesServices.singleton.clear().then((value) => AppNavigator.pushAndRemoveUntil(routeName: SignInScreen.route, predicate: (route)=>false));
   }
 
   String? setEmail(String email) {
@@ -128,6 +125,19 @@ class User {
     else{
       this._name = name;
     }
+  }
+
+  void _setIdAndGwt({required int id, required String jwt}){
+    _id = id;
+    _jwt = jwt;
+    _save();
+  }
+
+  void _save() async {
+    await SharedPreferencesServices.singleton.setInt(
+        key: SharedPreferencesKeys.userId, value: _id);
+    await SharedPreferencesServices.singleton.setString(
+        key: SharedPreferencesKeys.jwt, value: _jwt);
   }
 
   static int get id => _id;

@@ -1,41 +1,39 @@
+import 'package:do_it_flutter_v2/utils/app_colors.dart';
 import 'package:do_it_flutter_v2/utils/app_width.dart';
 import 'package:flutter/material.dart';
 
 class CustomItemWidget extends StatelessWidget {
   void Function()? deleteItem;
-  void Function()? onTap;
-  void Function()? tapOnCircle;
-  Color? circleColor;
+  void Function() onChange;
+  bool check;
   TextStyle? textStyle;
   String? text;
 
   CustomItemWidget(
-      {this.circleColor,
+      {required this.check,
       this.text,
       this.textStyle,
-      this.onTap,
       this.deleteItem,
-      this.tapOnCircle});
+      required this.onChange});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(
-          onPressed: tapOnCircle,
-          icon: Icon(Icons.circle),
-          iconSize: 17,
-          color: circleColor,
+        Checkbox(
+            value: check,
+            onChanged: (value) {
+              onChange();
+            },
+            // checkColor: AppColors.grey,
+          activeColor:  AppColors.grey,
         ),
         SizedBox(
           width: 10,
         ),
-        GestureDetector(
-          onTap: onTap,
-          child: Text(
-            "${text ?? ''}",
-            style: textStyle,
-          ),
+        Text(
+          "${text ?? ''}",
+          style: textStyle,
         ),
         AppWidth.expanded,
         IconButton(

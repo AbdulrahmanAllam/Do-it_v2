@@ -8,6 +8,7 @@ import 'package:do_it_flutter_v2/objects/user/ui/widgets/sign_in_button.dart';
 import 'package:do_it_flutter_v2/objects/user/ui/widgets/sign_up_button.dart';
 import 'package:do_it_flutter_v2/utils/app_colors.dart';
 import 'package:do_it_flutter_v2/utils/app_height.dart';
+import 'package:do_it_flutter_v2/utils/app_navigator.dart';
 import 'package:do_it_flutter_v2/utils/app_router.dart';
 import 'package:do_it_flutter_v2/widgets/custom_app_bar.dart';
 import 'package:do_it_flutter_v2/widgets/custom_state.dart';
@@ -31,13 +32,13 @@ class _SignUpScreenState extends CustomState<SignUpScreen> {
       child: Scaffold(
         appBar: customAppBar(
           title: "Sign Up",
-          leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(
-              Icons.arrow_back_outlined,
-              color: AppColors.black,
-            ),
-          ),
+          // leading: IconButton(
+          //   onPressed: () => AppNavigator.pop(),
+          //   icon: Icon(
+          //     Icons.arrow_back_outlined,
+          //     color: AppColors.black,
+          //   ),
+          // ),
         ),
         body: SingleChildScrollView(
           child: Consumer<SignUpProvider>(builder: (context, provider, child) {
@@ -72,7 +73,7 @@ class _SignUpScreenState extends CustomState<SignUpScreen> {
                     }),
                     OrDivider(),
                     SignInButton(onPressed: () {
-                      Navigator.pop(context);
+                      AppNavigator.pop();
                     }),
                   ],
                 ),

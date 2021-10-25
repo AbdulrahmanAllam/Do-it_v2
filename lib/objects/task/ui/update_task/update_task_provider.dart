@@ -21,7 +21,7 @@ class UpdateTaskProvider extends ChangeNotifier{
   update({Function(UpdateTaskResponse)? onSuccess}) {
     if (_formKey.currentState!.validate()) {
     if (_currentTask.equal(_oldTask)) {
-      customSnackBar(text: "you don't change any thing");
+      CustomSnackBar.show(message: "you don't change any thing");
     } else {
       _currentTask.update(
           onSuccess: onSuccess

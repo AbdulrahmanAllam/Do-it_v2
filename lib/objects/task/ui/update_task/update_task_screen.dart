@@ -46,29 +46,6 @@ class _UpdateTaskScreenState extends CustomState<UpdateTaskScreen> {
           ),
 
         );
-
-
-    //   ChangeNotifierProxyProvider<TasksListProvider, UpdateTaskProvider>(
-    //   create: (_) => UpdateTaskProvider(),
-    //   update: (_, tasksListProvider, taskItemProvider) => UpdateTaskProvider(task: tasksProvider.selectedTask),
-    //   child: Scaffold(
-    //     appBar: customAppBar(title: "Update Task"),
-    //     body:
-    //     // UpdateTaskBody(),
-    //
-    //     SingleChildScrollView(
-    //       child: Container(
-    //         height: MediaQuery.of(context).size.height -
-    //             AppBar().preferredSize.height -
-    //             MediaQuery.of(context).padding.top,
-    //         child: Padding(
-    //           padding: EdgeInsets.all(20.0),
-    //           child: UpdateTaskBody(),
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 
   @override

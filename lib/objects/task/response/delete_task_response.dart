@@ -8,7 +8,6 @@ class DeleteTaskResponse implements BaseResponse{
   bool? done;
   String? description;
   String? userId;
-  DeleteTaskResponseCategory? category;
   String? publishedAt;
   String? createdAt;
   String? updatedAt;
@@ -19,7 +18,6 @@ class DeleteTaskResponse implements BaseResponse{
         this.done,
         this.description,
         this.userId,
-        this.category,
         this.publishedAt,
         this.createdAt,
         this.updatedAt});
@@ -31,7 +29,6 @@ class DeleteTaskResponse implements BaseResponse{
     done = json['done'];
     description = json['description'];
     userId = json['user_id'];
-    category = DeleteTaskResponseCategory.fromJson(json['category']);
     publishedAt = json['published_at'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -43,48 +40,6 @@ class DeleteTaskResponse implements BaseResponse{
     data['title'] = this.title;
     data['done'] = this.done;
     data['description'] = this.description;
-    data['user_id'] = this.userId;
-      data['category'] = this.category?.toJson();
-    data['published_at'] = this.publishedAt;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    return data;
-  }
-}
-
-class DeleteTaskResponseCategory {
-  int? id;
-  String? name;
-  String? color;
-  String? userId;
-  String? publishedAt;
-  String? createdAt;
-  String? updatedAt;
-
-  DeleteTaskResponseCategory(
-      {this.id,
-        this.name,
-        this.color,
-        this.userId,
-        this.publishedAt,
-        this.createdAt,
-        this.updatedAt});
-
-  DeleteTaskResponseCategory.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    color = json['color'];
-    userId = json['user_id'];
-    publishedAt = json['published_at'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['color'] = this.color;
     data['user_id'] = this.userId;
     data['published_at'] = this.publishedAt;
     data['created_at'] = this.createdAt;

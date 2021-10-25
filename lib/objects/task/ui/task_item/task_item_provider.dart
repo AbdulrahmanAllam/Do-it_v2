@@ -23,7 +23,6 @@ class TaskItemProvider extends ChangeNotifier{
   }
 
   String get title => _task.title;
-  int get color => _task.category?.color??0;
   bool get done => _task.done;
 
   set task(Task? v) {

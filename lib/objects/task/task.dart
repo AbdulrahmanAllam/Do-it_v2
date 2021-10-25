@@ -1,4 +1,3 @@
-import 'package:do_it_flutter_v2/objects/category/category.dart';
 import 'package:do_it_flutter_v2/objects/task/response/add_task_response.dart';
 import 'package:do_it_flutter_v2/objects/task/response/delete_task_response.dart';
 import 'package:do_it_flutter_v2/objects/task/response/update_task_response.dart';
@@ -13,22 +12,19 @@ class Task {
   late String _title;
   late bool _done;
   String _description;
-  Category? _category;
 
   Task(
       {required int id,
       required String title,
       required bool done,
-      required String description,
-      Category? category})
+      required String description,})
       : _title = title,
         _done = done,
         _id = id,
-        _description = description,
-        _category = category;
+        _description = description;
 
   void getInfo(){
-    Log.information("title: ${this._title}, done: ${this._done}, description: ${this._description}, category_id: ${this._category?.id}");
+    Log.information("title: ${this._title}, done: ${this._done}, description: ${this._description}");
   }
 
   void setAll(Task task){
@@ -36,11 +32,10 @@ class Task {
     this.setTitle(task.title);
     this.done = task.done;
     this.setDescription(task.description);
-    this.category = task.category;
   }
 
   bool equal(Task other){
-    if(this._title == other.title && this._done == other.done && this._description == other.description && this._category?.id == other.category?.id){
+    if(this._title == other.title && this._done == other.done && this._description == other.description){
       getInfo();
       other.getInfo();
       return true;
@@ -53,7 +48,6 @@ class Task {
     Map<String, String> body = {
       "title": this._title,
       "description": this._description,
-      "category": this._category?.id.toString()??"0",
     };
     await _httpServices.put<UpdateTaskResponse>(
       endpoint: "tasks/${this._id}",
@@ -70,7 +64,6 @@ class Task {
     Map<String, String> body = {
       "title": this._title,
       "description": this._description,
-      "category": this._category?.id.toString()??"0",
       "user_id": User.id.toString(),
     };
     await _httpServices.post<AddTaskResponse>(
@@ -127,6 +120,4 @@ class Task {
     _description = v;
   }
 
-  Category? get category => _category;
-  set category(Category? v) => _category = v;
 }
